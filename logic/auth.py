@@ -1,4 +1,3 @@
-from selenium import webdriver
 import os
 import sys
 from abc import ABC, abstractmethod
@@ -9,16 +8,12 @@ parent_dir = os.path.abspath(
 if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
-from config import ch_input_method as input_method
-from driver import driver
 from page_controls.auth import LoginPage
+from input_methods import InputMethod
 
-
-controls = LoginPage(driver)
-input_getter = input_method().get_input
 
 class LoginMethod(ABC):
-    def __init__(self, controls: LoginPage, inputter: input_method):
+    def __init__(self, controls: LoginPage, inputter: InputMethod):
         self.ctrl = controls
         self.inputter = inputter
 
@@ -34,7 +29,7 @@ class EmailLogin(LoginMethod):
         self.ctrl.submit_button_click()
 
         self.ctrl.choose_email_option()
-        email = input_getter('email')
+        email = self.inputter.get_input('email')
         self.ctrl.enter_email(email)
 
         return True
@@ -42,9 +37,9 @@ class EmailLogin(LoginMethod):
 
 class PasswordLogin(LoginMethod):
     def login(self) -> bool:
-        self.ctrl.choose_email_option()
+        self.ctrl.choose_password_auth()
 
-        password = input_getter('password')
+        password = self.inputter.get_input('password')
         self.ctrl.enter_password(password)
 
         self.ctrl.submit_button_click()
@@ -58,11 +53,3 @@ def process_order(phase1process: LoginMethod, phase2process: LoginMethod):
 
     if phase2process.login():
         print('Phase 2 loggigning Success!')
-
-email_method = EmailLogin()
-password_method = PasswordLogin()
-
-process_order(email_method, password_method)
-
-# all_cookies = {cookie['name']: cookie['value'] for cookie in driver.get_cookies()}
-# print(all_cookies)
