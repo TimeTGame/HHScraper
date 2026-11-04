@@ -8,9 +8,6 @@ class VacancyList():
         self.ctrl = controls
         self.inputter = inputter
 
-    def next_page(self):
-        self.ctrl.goto_next_page()
-
     def get_vacancy_links(self, query: str = '') -> Iterator[str]:
         self.ctrl.goto_vacancy_list(query)
 
