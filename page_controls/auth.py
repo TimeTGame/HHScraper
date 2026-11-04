@@ -1,9 +1,9 @@
-from selenium import webdriver
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
 
 class LoginPage:
-    def __init__(self, driver: webdriver):
+    def __init__(self, driver: WebDriver):
         self.driver = driver
         self.SUBMIT_BT = (By.CSS_SELECTOR, "button[type='submit']")
         self.EMAIL_CHOOSE_BT = (By.CSS_SELECTOR, "input[type='radio'][value='email'] + span")
