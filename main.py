@@ -5,7 +5,7 @@ from page_controls.vacancy_list import VacancyListPage
 from logic.auth import EmailLogin, PasswordLogin, process_order
 from logic.vacancy_list import VacancyList
 
-from time import sleep
+
 def main() -> None:
     with create_driver() as driver:
         inputter = ConsoleInput()
