@@ -1,13 +1,4 @@
-import os
-import sys
 from abc import ABC, abstractmethod
-
-parent_dir = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '..')
-)
-if parent_dir not in sys.path:
-    sys.path.append(parent_dir)
-
 from page_controls.auth import LoginPage
 from input_methods import InputMethod
 
@@ -49,7 +40,7 @@ class PasswordLogin(LoginMethod):
 
 def process_order(phase1process: LoginMethod, phase2process: LoginMethod):
     if phase1process.login():
-        print('Phase 1 loggigning Success!')
+        print('Phase 1 authorization Success!')
 
     if phase2process.login():
-        print('Phase 2 loggigning Success!')
+        print('Phase 2 authorization Success!')

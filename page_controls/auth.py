@@ -13,7 +13,6 @@ class LoginPage:
 
     def goto_login_page(self):
         self.driver.get('https://hh.ru/account/login')
-        self.driver.implicitly_wait(10)
 
     def submit_button_click(self):
         self.driver.find_element(*self.SUBMIT_BT).click()
